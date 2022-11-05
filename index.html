@@ -14,6 +14,38 @@
   <title>Vue To Do List</title>
 </head>
 <body>
+
+  <main>
+
+    <div id="app" class="container">
+
+        <div class="logo">
+          <img :src="imgLogo" alt="">
+        </div>
+        <div class="input-area">
+          <input @keyup.enter="createTask()" type="text" placeholder="new tasks" v-model.trim="newMessageString">
+          <button @click="createTask()">aggiungi</button>
+          <p class="error">{{errorString}}</p>
+        </div>
+        <div class="tasks-area">
+          <ul v-if="tasks.length > 0 ">
+            <li
+              v-for="(task, index) in tasks"
+              :class="{'done': task.done}"
+              class="task"
+              @click="task.done = !task.done">
+              <span>{{task.text}}</span>
+              <i 
+              @click.stop="removeTask(index)"
+              class="fa-solid fa-xmark"></i>
+            </li>
+          </ul>
+          <h3 v-else>Non ci sono Tasks &#128526</h3>
+        </div>
+        
+    </div>
+
+  </main>
   
   <script src="js/script.js"></script>
 </body>
